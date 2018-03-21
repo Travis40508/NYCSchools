@@ -1,5 +1,8 @@
 package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -22,7 +25,7 @@ public interface SchoolsRetrofit {
     Call<School> getSchool(@Query("school_name") String schoolName);
 
 
-    class School {
+    class School implements Parcelable{
         @SerializedName("school_name")
         @Expose private String schoolName;
 
@@ -35,6 +38,16 @@ public interface SchoolsRetrofit {
 
         public String getNeighborhood() {
             return neighborhood;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+
         }
     }
 }

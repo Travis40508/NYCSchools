@@ -15,6 +15,7 @@ import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.R;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.adapters.SchoolsAdapter;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.SchoolsRetrofit;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.databinding.ActivityMainBinding;
+import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.ui.SchoolDetailsUI.SchoolDetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
     private MainViewModel viewModel;
     private RecyclerView recyclerView;
     private SchoolsAdapter adapter;
+    public static String TAG = "SCHOOL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     @Override
     public void onSchoolClicked(SchoolsRetrofit.School school) {
+        viewModel.getSchool(school.getSchoolName());
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(TAG, school);
+        SchoolDetailsFragment detailsFragment = SchoolDetailsFragment.newInstance();
+        detailsFragment.setArguments(bundle);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, detailsFragment).commit();
     }
 }

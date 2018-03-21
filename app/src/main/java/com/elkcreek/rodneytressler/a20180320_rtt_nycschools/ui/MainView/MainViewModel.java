@@ -36,4 +36,9 @@ public class MainViewModel extends ViewModel {
     public LiveData<List<SchoolsRetrofit.School>> getSchools() {
         return schools;
     }
+
+    public SchoolsRetrofit.School getSchool(String schoolName) {
+        SchoolsRetrofit.School school = schoolsApi.getSchool(schoolName).getValue();
+        return school;
+    }
 }

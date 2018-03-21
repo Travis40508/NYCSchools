@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <data>
+        <variable
+            name="vm"
+            type="com.elkcreek.rodneytressler.a20180320_rtt_nycschools.ui.SchoolDetailsUI.SchoolDetailsViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/text_school_sat"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="placeholder sat"
+            android:layout_height="wrap_content" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

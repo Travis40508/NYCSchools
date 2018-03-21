@@ -2,6 +2,7 @@ package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common;
 
 import android.app.Activity;
 import android.app.Application;
+import android.support.v4.app.Fragment;
 
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.ApplicationComponent;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.ApplicationModule;
@@ -13,15 +14,19 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by rodneytressler on 3/20/18.
  */
 
-public class SchoolsApplication extends Application implements HasActivityInjector{
+public class SchoolsApplication extends Application implements HasActivityInjector, HasSupportFragmentInjector{
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingFragmentInjector;
 
     private String baseUrl = "https://data.cityofnewyork.us";
 
@@ -38,5 +43,10 @@ public class SchoolsApplication extends Application implements HasActivityInject
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return dispatchingAndroidInjector;
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingFragmentInjector;
     }
 }

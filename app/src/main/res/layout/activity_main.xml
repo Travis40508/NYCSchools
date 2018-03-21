@@ -25,6 +25,15 @@
 
         </android.support.v7.widget.RecyclerView>
 
+        <FrameLayout
+            android:id="@+id/fragment_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:elevation="5dp">
+        </FrameLayout>
+
     </android.support.constraint.ConstraintLayout>
 
 </layout>

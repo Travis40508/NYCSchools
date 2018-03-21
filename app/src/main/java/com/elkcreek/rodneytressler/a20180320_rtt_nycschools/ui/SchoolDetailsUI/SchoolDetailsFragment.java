@@ -1,10 +1,12 @@
 package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.ui.SchoolDetailsUI;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.R;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.SchoolsRetrofit;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.databinding.FragmentSchoolDetailsBinding;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.ui.MainView.MainActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,7 +45,17 @@ public class SchoolDetailsFragment extends Fragment {
         binding.setVm(viewModel);
 
         school = getArguments().getParcelable(MainActivity.TAG);
-        viewModel.initSchool(school);
+        viewModel.initSchool(school.getSchoolDbn());
+
+        viewModel.getSchool().observe(this, new Observer<List<SchoolsRetrofit.SchoolDetails>>() {
+            @Override
+            public void onChanged(@Nullable List<SchoolsRetrofit.SchoolDetails> schoolDetails) {
+                if(schoolDetails.size() > 0) {
+                    viewModel.updateView(schoolDetails.get(0));
+                }
+            }
+        });
+
         return view;
     }
 

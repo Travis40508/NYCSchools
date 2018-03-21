@@ -47,26 +47,25 @@ public class SchoolsApiImpl implements SchoolsApi {
     }
 
     @Override
-    public LiveData<SchoolsRetrofit.School> getSchool(String schoolName) {
-        final MutableLiveData school = new MutableLiveData();
+    public LiveData<List<SchoolsRetrofit.SchoolDetails>> getSchool(String schoolDbn) {
+        final MutableLiveData<List<SchoolsRetrofit.SchoolDetails>> data = new MutableLiveData<>();
 
-        schoolsRetrofit.getSchool(schoolName).enqueue(new Callback<SchoolsRetrofit.School>() {
+        schoolsRetrofit.getSchool(schoolDbn).enqueue(new Callback<List<SchoolsRetrofit.SchoolDetails>>() {
             @Override
-            public void onResponse(Call<SchoolsRetrofit.School> call, Response<SchoolsRetrofit.School> response) {
+            public void onResponse(Call<List<SchoolsRetrofit.SchoolDetails>> call, Response<List<SchoolsRetrofit.SchoolDetails>> response) {
                 if(response.isSuccessful()) {
-                    school.setValue(response.body());
+                    data.setValue(response.body());
                 } else {
                     Log.e("RESPONSE UNSUCCESSFUL", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<SchoolsRetrofit.School> call, Throwable t) {
+            public void onFailure(Call<List<SchoolsRetrofit.SchoolDetails>> call, Throwable t) {
                 Log.e("RESPONSE FAILURE", t.getMessage());
             }
         });
-
-
-        return school;
+        return data;
     }
+
 }

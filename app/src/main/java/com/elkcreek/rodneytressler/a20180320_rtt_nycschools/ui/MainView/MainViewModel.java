@@ -37,8 +37,5 @@ public class MainViewModel extends ViewModel {
         return schools;
     }
 
-    public SchoolsRetrofit.School getSchool(String schoolName) {
-        SchoolsRetrofit.School school = schoolsApi.getSchool(schoolName).getValue();
-        return school;
-    }
+
 }

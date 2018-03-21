@@ -69,12 +69,25 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     @Override
     public void onSchoolClicked(SchoolsRetrofit.School school) {
-        viewModel.getSchool(school.getSchoolName());
         Bundle bundle = new Bundle();
         bundle.putParcelable(TAG, school);
         SchoolDetailsFragment detailsFragment = SchoolDetailsFragment.newInstance();
         detailsFragment.setArguments(bundle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, detailsFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter, R.anim.exit)
+                .replace(R.id.fragment_holder, detailsFragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().findFragmentById(R.id.fragment_holder) != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.pop_enter, R.anim.pop_exit)
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder))
+                    .commit();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

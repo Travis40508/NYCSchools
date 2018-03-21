@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -13,10 +14,43 @@
         android:background="@android:color/white">
 
         <TextView
-            android:id="@+id/text_school_sat"
+            android:id="@+id/text_school_reading"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:textColor="@android:color/black"
-            android:text="placeholder sat"
+            android:text="@{vm.readingScore}"
+            android:textSize="24sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/text_school_reading"
+            android:id="@+id/text_school_math"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="@{vm.mathScore}"
+            android:textSize="24sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/text_school_math"
+            android:id="@+id/text_school_writing"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="@{vm.writingScore}"
+            android:textSize="24sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/text_school_writing"
+            android:id="@+id/test_school_test_takers"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="@{vm.totalTestTakers}"
+            android:textSize="24sp"
             android:layout_height="wrap_content" />
 
     </android.support.constraint.ConstraintLayout>

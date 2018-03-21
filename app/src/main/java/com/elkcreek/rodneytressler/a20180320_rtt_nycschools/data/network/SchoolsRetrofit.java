@@ -22,7 +22,7 @@ public interface SchoolsRetrofit {
     Call<List<School>> getSchools();
 
     @GET("/resource/734v-jeq5.json")
-    Call<School> getSchool(@Query("school_name") String schoolName);
+    Call<List<SchoolDetails>> getSchool(@Query("dbn") String schoolDbn);
 
 
     class School implements Parcelable{
@@ -32,12 +32,40 @@ public interface SchoolsRetrofit {
         @SerializedName("neighborhood")
         @Expose private String neighborhood;
 
+        @SerializedName("dbn")
+        @Expose private String schoolDbn;
+
+
+
+        protected School(Parcel in) {
+            schoolName = in.readString();
+            neighborhood = in.readString();
+            schoolDbn = in.readString();
+        }
+
+        public static final Creator<School> CREATOR = new Creator<School>() {
+            @Override
+            public School createFromParcel(Parcel in) {
+                return new School(in);
+            }
+
+            @Override
+            public School[] newArray(int size) {
+                return new School[size];
+            }
+        };
+
         public String getSchoolName() {
             return schoolName;
         }
 
         public String getNeighborhood() {
             return neighborhood;
+        }
+
+
+        public String getSchoolDbn() {
+            return schoolDbn;
         }
 
         @Override
@@ -47,7 +75,39 @@ public interface SchoolsRetrofit {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(schoolName);
+            dest.writeString(neighborhood);
+            dest.writeString(schoolDbn);
+        }
+    }
 
+    class SchoolDetails {
+        @SerializedName("sat_critical_reading_avg_score")
+        @Expose private String readingScore;
+
+        @SerializedName("sat_math_avg_score")
+        @Expose private String mathScore;
+
+        @SerializedName("sat_writing_avg_score")
+        @Expose private String writingScore;
+
+        @SerializedName("num_of_sat_test_takers")
+        @Expose private String totalTestTakers;
+
+        public String getReadingScore() {
+            return readingScore;
+        }
+
+        public String getMathScore() {
+            return mathScore;
+        }
+
+        public String getWritingScore() {
+            return writingScore;
+        }
+
+        public String getTotalTestTakers() {
+            return totalTestTakers;
         }
     }
 }

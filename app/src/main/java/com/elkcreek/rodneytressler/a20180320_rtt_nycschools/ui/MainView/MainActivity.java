@@ -6,12 +6,16 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.R;
+import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.adapters.SchoolsAdapter;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.SchoolsRetrofit;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     MainViewModelFactory factory;
 
     private MainViewModel viewModel;
+    private RecyclerView recyclerView;
+    private SchoolsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = getViewModel();
         binding.setVm(viewModel);
+
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<SchoolsRetrofit.School> schoolList = new ArrayList<>();
+        adapter = new SchoolsAdapter(schoolList);
+        recyclerView.setAdapter(adapter);
+
         viewModel.init();
 
         observeSchoolsList();
@@ -41,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getSchools().observe(this, new Observer<List<SchoolsRetrofit.School>>() {
             @Override
             public void onChanged(@Nullable List<SchoolsRetrofit.School> schools) {
-                for(SchoolsRetrofit.School item : schools) {
-                    Log.d("@@@@", item.getSchoolName());
-                }
+                adapter.setSchools(schools);
+                adapter.notifyDataSetChanged();
             }
         });
     }

@@ -22,8 +22,15 @@ public interface SchoolsRetrofit {
         @SerializedName("school_name")
         @Expose private String schoolName;
 
+        @SerializedName("neighborhood")
+        @Expose private String neighborhood;
+
         public String getSchoolName() {
             return schoolName;
+        }
+
+        public String getNeighborhood() {
+            return neighborhood;
         }
     }
 }

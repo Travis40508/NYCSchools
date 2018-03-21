@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.R;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.adapters.SchoolsAdapter;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Callback{
 
     @Inject
     MainViewModelFactory factory;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<SchoolsRetrofit.School> schoolList = new ArrayList<>();
-        adapter = new SchoolsAdapter(schoolList);
+        adapter = new SchoolsAdapter(schoolList, this);
         recyclerView.setAdapter(adapter);
 
         viewModel.init();
@@ -62,5 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
     private MainViewModel getViewModel() {
         return ViewModelProviders.of(this, factory).get(MainViewModel.class);
+    }
+
+    @Override
+    public void onSchoolClicked(SchoolsRetrofit.School school) {
+
     }
 }

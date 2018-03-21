@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface SchoolsApi {
     LiveData<List<SchoolsRetrofit.School>> getSchools();
+
+    LiveData<SchoolsRetrofit.School> getSchool(String schoolName);
 }

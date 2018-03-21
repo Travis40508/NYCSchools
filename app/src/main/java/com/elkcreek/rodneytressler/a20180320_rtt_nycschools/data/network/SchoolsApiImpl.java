@@ -45,4 +45,28 @@ public class SchoolsApiImpl implements SchoolsApi {
 
         return schoolsList;
     }
+
+    @Override
+    public LiveData<SchoolsRetrofit.School> getSchool(String schoolName) {
+        final MutableLiveData school = new MutableLiveData();
+
+        schoolsRetrofit.getSchool(schoolName).enqueue(new Callback<SchoolsRetrofit.School>() {
+            @Override
+            public void onResponse(Call<SchoolsRetrofit.School> call, Response<SchoolsRetrofit.School> response) {
+                if(response.isSuccessful()) {
+                    school.setValue(response.body());
+                } else {
+                    Log.e("RESPONSE UNSUCCESSFUL", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SchoolsRetrofit.School> call, Throwable t) {
+                Log.e("RESPONSE FAILURE", t.getMessage());
+            }
+        });
+
+
+        return school;
+    }
 }

@@ -14,6 +14,8 @@ import javax.inject.Inject;
 
 public class SchoolDetailsFactory implements ViewModelProvider.Factory {
 
+    /**Provides Dependencies for SchoolDetailsViewModel */
+
     private final SchoolsApi schoolsApi;
 
     @Inject

@@ -28,6 +28,8 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class SchoolDetailsFragment extends Fragment {
 
+    /**Deals with presentation components */
+
     private SchoolsRetrofit.School school;
     private SchoolDetailsViewModel viewModel;
 

@@ -22,6 +22,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class SchoolsApplication extends Application implements HasActivityInjector, HasSupportFragmentInjector{
 
+    /**Application class for DI concerns*/
+
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 

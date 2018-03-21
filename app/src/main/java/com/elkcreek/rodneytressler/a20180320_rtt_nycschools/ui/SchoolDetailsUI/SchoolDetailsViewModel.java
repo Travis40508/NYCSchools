@@ -32,6 +32,8 @@ public class SchoolDetailsViewModel extends ViewModel {
         totalTestTakers = new ObservableField<>("Test Takers - N/A");
     }
 
+    /**Returns school data via the school DBN. Would've rather stored this in an SQLite database for performance improvements, but ran out of
+     * time due to work commitments.  */
     public void initSchool(String schoolDbn) {
         if(school != null) {
             return;

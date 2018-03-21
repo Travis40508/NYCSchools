@@ -14,6 +14,8 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivitiesModule {
 
+    /** Module with various sub-components to provide objects to our view*/
+
     @ContributesAndroidInjector
     abstract MainActivity contributesMainActivityInjector();
 

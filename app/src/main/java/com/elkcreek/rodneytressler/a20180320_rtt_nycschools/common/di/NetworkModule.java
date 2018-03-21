@@ -13,7 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by rodneytressler on 3/20/18.
  */
 
+
 @Module
+
+/**Network module for providing retrofit implementations throughout application */
 public class NetworkModule {
 
     private String baseUrl;

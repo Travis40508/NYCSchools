@@ -26,6 +26,10 @@ import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Callback{
 
+    /**Activity for handling presentation of the view as well as click-events */
+
+
+    /**Provides dependencies for ViewModel */
     @Inject
     MainViewModelFactory factory;
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**For DI injection */
+
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
     }
 
     private void observeSchoolsList() {
+
+        /**Listens for changes to data and updates view accordingly (I would've rather done this with a local database, but I've been busy
+         * and ran out of time (it's currently 1 AM) */
         viewModel.getSchools().observe(this, new Observer<List<SchoolsRetrofit.School>>() {
             @Override
             public void onChanged(@Nullable List<SchoolsRetrofit.School> schools) {
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     @Override
     public void onSchoolClicked(SchoolsRetrofit.School school) {
+        /**Launches fragment with school clicked whenever school is clicked. */
         Bundle bundle = new Bundle();
         bundle.putParcelable(TAG, school);
         SchoolDetailsFragment detailsFragment = SchoolDetailsFragment.newInstance();
@@ -81,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     @Override
     public void onBackPressed() {
+        /**Deals with back presses, using animations. */
         if(getSupportFragmentManager().findFragmentById(R.id.fragment_holder) != null) {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.pop_enter, R.anim.pop_exit)

@@ -21,6 +21,7 @@ public class SchoolsAdapter extends RecyclerView.Adapter<SchoolsAdapter.SchoolsV
     private final Callback callback;
     private List<SchoolsRetrofit.School> schoolsList;
 
+    /** Takes in a list of schools and displays them, using a callback to deal with click events back in the main activity.*/
     public SchoolsAdapter(List<SchoolsRetrofit.School> schoolsList, Callback callback) {
         this.schoolsList = schoolsList;
         this.callback = callback;

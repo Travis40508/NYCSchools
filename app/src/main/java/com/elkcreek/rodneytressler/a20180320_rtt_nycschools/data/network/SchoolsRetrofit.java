@@ -17,6 +17,7 @@ import retrofit2.http.Query;
  */
 
 public interface SchoolsRetrofit {
+    /**Class for providing models and api calls for said-models */
 
     @GET("/resource/97mf-9njv.json")
     Call<List<School>> getSchools();

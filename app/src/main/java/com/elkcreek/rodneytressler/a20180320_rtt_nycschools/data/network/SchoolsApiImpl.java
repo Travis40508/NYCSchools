@@ -16,6 +16,8 @@ import retrofit2.Response;
 
 public class SchoolsApiImpl implements SchoolsApi {
 
+    /**Implementation class for all of our API calls */
+
     private final SchoolsRetrofit schoolsRetrofit;
 
     public SchoolsApiImpl(SchoolsRetrofit schoolsRetrofit) {

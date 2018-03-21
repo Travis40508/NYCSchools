@@ -14,6 +14,7 @@ import dagger.Provides;
 
 
 @Module
+/**Application module for providing application context */
 public class ApplicationModule {
 
     private final Application application;

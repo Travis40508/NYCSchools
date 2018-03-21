@@ -9,6 +9,8 @@ import java.util.List;
  */
 
 public interface SchoolsApi {
+    /**Interface for keeping our impl class data tied to a data contract and to improve testing later on */
+
     LiveData<List<SchoolsRetrofit.School>> getSchools();
 
     LiveData<List<SchoolsRetrofit.SchoolDetails>> getSchool(String schoolDbn);

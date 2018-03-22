@@ -49,15 +49,6 @@ public class SchoolDetailsFragment extends Fragment {
         school = getArguments().getParcelable(MainActivity.TAG);
         viewModel.initSchool(school.getSchoolDbn());
 
-        viewModel.getSchool().observe(this, new Observer<List<SchoolsRetrofit.SchoolDetails>>() {
-            @Override
-            public void onChanged(@Nullable List<SchoolsRetrofit.SchoolDetails> schoolDetails) {
-                if(schoolDetails.size() > 0) {
-                    viewModel.updateView(schoolDetails.get(0));
-                }
-            }
-        });
-
         return view;
     }
 

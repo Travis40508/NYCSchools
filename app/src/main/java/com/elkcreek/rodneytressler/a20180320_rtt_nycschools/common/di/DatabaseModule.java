@@ -17,6 +17,9 @@ import dagger.Provides;
 @Module
 public class DatabaseModule {
 
+    /**Module provides a singleton instance of our database. Normally I wouldn't allow mainthread queries and would use background threads,
+     * but this app is so light that it doesn't really matter. */
+
     @Provides
     @Singleton
     SchoolsDatabase providesSchoolDatabase(Context context) {

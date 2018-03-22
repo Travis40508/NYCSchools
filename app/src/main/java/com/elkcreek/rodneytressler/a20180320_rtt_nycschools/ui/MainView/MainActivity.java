@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
     private void observeSchoolsList() {
 
-        /**Listens for changes to data and updates view accordingly (I would've rather done this with a local database, but I've been busy
-         * and ran out of time (it's currently 1 AM) */
+        /**Listens for changes to database and updates view accordingly after the database is populated
+         * from an api call */
         viewModel.getSchoolsDatabase().schoolsDao().getAllSchools().observe(this, new Observer<List<SchoolsRetrofit.School>>() {
             @Override
             public void onChanged(@Nullable final List<SchoolsRetrofit.School> schools) {

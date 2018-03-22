@@ -9,6 +9,7 @@ import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.Schools
  * Created by rodneytressler on 3/21/18.
  */
 
+/** Database used for storing data */
 @Database(version = 2, entities = {SchoolsRetrofit.School.class, SchoolsRetrofit.SchoolDetails.class}, exportSchema = false)
 public abstract class SchoolsDatabase extends RoomDatabase{
 

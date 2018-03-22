@@ -25,6 +25,7 @@ public class SchoolDetailsViewModel extends ViewModel {
     public ObservableField<String> writingScore;
     public ObservableField<String> mathScore;
     public ObservableField<String> totalTestTakers;
+    public ObservableField<String> schoolName;
     private final SchoolsApi schoolsApi;
 
     public SchoolDetailsViewModel(SchoolsApi schoolsApi, SchoolsDatabase schoolsDatabase) {
@@ -34,11 +35,12 @@ public class SchoolDetailsViewModel extends ViewModel {
         writingScore = new ObservableField<>("Writing Score - N/A");
         mathScore = new ObservableField<>("Math Score - N/A");
         totalTestTakers = new ObservableField<>("Test Takers - N/A");
+        schoolName = new ObservableField<>("School Name Unavailable");
     }
 
     /**
-     * Returns school data via the school DBN. Would've rather stored this in an SQLite database for performance improvements, but ran out of
-     * time due to work commitments.
+     * Uses SQLite database to store clicked school. This way it only has to perform any work the first time and retrieve it from the database
+     * every time after.
      */
     public void initSchool(final String schoolDbn) {
 
@@ -59,6 +61,7 @@ public class SchoolDetailsViewModel extends ViewModel {
 
 
     public void updateView(SchoolsRetrofit.SchoolDetails schoolDetails) {
+        schoolName.set(schoolDetails.getSchoolName());
         readingScore.set("Reading Score - " + schoolDetails.getReadingScore());
         writingScore.set("Writing Score - " + schoolDetails.getWritingScore());
         mathScore.set("Math Score - " + schoolDetails.getMathScore());

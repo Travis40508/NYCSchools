@@ -38,7 +38,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public void init() {
-        /**Sets livedata schools equal to the value of the API call. would've rather this had been a local SQLite database */
+        /**Sets livedata schools equal to the value of the Database after it's saved via an API call.  */
         if (this.schoolsDatabase != null) {
             return;
         }

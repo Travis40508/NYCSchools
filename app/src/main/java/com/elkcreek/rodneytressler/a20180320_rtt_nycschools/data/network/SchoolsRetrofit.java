@@ -126,6 +126,9 @@ public interface SchoolsRetrofit {
         @SerializedName("dbn")
         @Expose private String schoolDbn;
 
+        @SerializedName("school_name")
+        @Expose private String schoolName;
+
         @SerializedName("sat_critical_reading_avg_score")
         @Expose private String readingScore;
 
@@ -188,6 +191,14 @@ public interface SchoolsRetrofit {
 
         public void setSchoolDbn(String schoolDbn) {
             this.schoolDbn = schoolDbn;
+        }
+
+        public String getSchoolName() {
+            return schoolName;
+        }
+
+        public void setSchoolName(String schoolName) {
+            this.schoolName = schoolName;
         }
     }
 }

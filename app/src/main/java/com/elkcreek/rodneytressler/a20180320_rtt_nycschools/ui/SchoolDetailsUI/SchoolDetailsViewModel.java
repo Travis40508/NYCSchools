@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.SchoolsApi;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network.SchoolsRetrofit;
+import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.repository.SchoolsDatabase;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class SchoolDetailsViewModel extends ViewModel {
     public ObservableField<String> totalTestTakers;
     private final SchoolsApi schoolsApi;
 
-    public SchoolDetailsViewModel(SchoolsApi schoolsApi) {
+    public SchoolDetailsViewModel(SchoolsApi schoolsApi, SchoolsDatabase schoolsDatabase) {
         this.schoolsApi = schoolsApi;
         readingScore = new ObservableField<>("Reading Score - N/A");
         writingScore = new ObservableField<>("Writing Score - N/A");

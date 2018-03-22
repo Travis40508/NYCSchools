@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.ApplicationComponent;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.ApplicationModule;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.DaggerApplicationComponent;
+import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.DatabaseModule;
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di.NetworkModule;
 
 import javax.inject.Inject;
@@ -38,6 +39,7 @@ public class SchoolsApplication extends Application implements HasActivityInject
         DaggerApplicationComponent.builder()
                 .networkModule(new NetworkModule(baseUrl))
                 .applicationModule(new ApplicationModule(this))
+                .databaseModule(new DatabaseModule())
                 .build()
                 .inject(this);
     }

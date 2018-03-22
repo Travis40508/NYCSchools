@@ -1,5 +1,7 @@
 package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.network;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -26,7 +28,13 @@ public interface SchoolsRetrofit {
     Call<List<SchoolDetails>> getSchool(@Query("dbn") String schoolDbn);
 
 
+    @Entity
     class School implements Parcelable{
+
+        @PrimaryKey(autoGenerate = true)
+        int id;
+
+
         @SerializedName("school_name")
         @Expose private String schoolName;
 
@@ -37,6 +45,9 @@ public interface SchoolsRetrofit {
         @Expose private String schoolDbn;
 
 
+        public School() {
+
+        }
 
         protected School(Parcel in) {
             schoolName = in.readString();
@@ -80,9 +91,38 @@ public interface SchoolsRetrofit {
             dest.writeString(neighborhood);
             dest.writeString(schoolDbn);
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setSchoolName(String schoolName) {
+            this.schoolName = schoolName;
+        }
+
+        public void setNeighborhood(String neighborhood) {
+            this.neighborhood = neighborhood;
+        }
+
+        public void setSchoolDbn(String schoolDbn) {
+            this.schoolDbn = schoolDbn;
+        }
+
+        public static Creator<School> getCREATOR() {
+            return CREATOR;
+        }
     }
 
+    @Entity
     class SchoolDetails {
+
+        @PrimaryKey(autoGenerate = true)
+        int id;
+
         @SerializedName("sat_critical_reading_avg_score")
         @Expose private String readingScore;
 
@@ -94,6 +134,10 @@ public interface SchoolsRetrofit {
 
         @SerializedName("num_of_sat_test_takers")
         @Expose private String totalTestTakers;
+
+        public SchoolDetails() {
+
+        }
 
         public String getReadingScore() {
             return readingScore;
@@ -109,6 +153,30 @@ public interface SchoolsRetrofit {
 
         public String getTotalTestTakers() {
             return totalTestTakers;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public void setReadingScore(String readingScore) {
+            this.readingScore = readingScore;
+        }
+
+        public void setMathScore(String mathScore) {
+            this.mathScore = mathScore;
+        }
+
+        public void setWritingScore(String writingScore) {
+            this.writingScore = writingScore;
+        }
+
+        public void setTotalTestTakers(String totalTestTakers) {
+            this.totalTestTakers = totalTestTakers;
         }
     }
 }

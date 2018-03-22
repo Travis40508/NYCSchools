@@ -2,6 +2,8 @@ package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.di;
 
 import com.elkcreek.rodneytressler.a20180320_rtt_nycschools.common.SchoolsApplication;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
@@ -10,7 +12,8 @@ import dagger.android.AndroidInjectionModule;
  */
 
 /**Simple component class for providing objects throughout our application */
-@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, ActivitiesModule.class, NetworkModule.class})
+@Singleton
+@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class, ActivitiesModule.class, NetworkModule.class, DatabaseModule.class})
 public interface ApplicationComponent {
 
     void inject(SchoolsApplication schoolsApplication);

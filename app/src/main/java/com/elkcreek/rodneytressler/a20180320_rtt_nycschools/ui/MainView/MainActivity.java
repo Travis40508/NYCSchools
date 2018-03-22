@@ -3,6 +3,7 @@ package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.ui.MainView;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,12 +25,14 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Callback{
+public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Callback {
 
     /**Activity for handling presentation of the view as well as click-events */
 
 
-    /**Provides dependencies for ViewModel */
+    /**
+     * Provides dependencies for ViewModel
+     */
     @Inject
     MainViewModelFactory factory;
 
@@ -63,9 +66,9 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
 
         /**Listens for changes to data and updates view accordingly (I would've rather done this with a local database, but I've been busy
          * and ran out of time (it's currently 1 AM) */
-        viewModel.getSchools().observe(this, new Observer<List<SchoolsRetrofit.School>>() {
+        viewModel.getSchoolsDatabase().schoolsDao().getAllSchools().observe(this, new Observer<List<SchoolsRetrofit.School>>() {
             @Override
-            public void onChanged(@Nullable List<SchoolsRetrofit.School> schools) {
+            public void onChanged(@Nullable final List<SchoolsRetrofit.School> schools) {
                 adapter.setSchools(schools);
                 adapter.notifyDataSetChanged();
             }
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements SchoolsAdapter.Ca
     @Override
     public void onBackPressed() {
         /**Deals with back presses, using animations. */
-        if(getSupportFragmentManager().findFragmentById(R.id.fragment_holder) != null) {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_holder) != null) {
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.pop_enter, R.anim.pop_exit)
                     .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_holder))

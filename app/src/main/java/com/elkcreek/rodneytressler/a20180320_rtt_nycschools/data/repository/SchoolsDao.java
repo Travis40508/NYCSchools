@@ -1,5 +1,6 @@
 package com.elkcreek.rodneytressler.a20180320_rtt_nycschools.data.repository;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -23,6 +24,9 @@ public interface SchoolsDao {
     @Insert(onConflict = REPLACE)
     void insertSchools(SchoolsRetrofit.School school);
 
+    @Insert
+    void insertAll(SchoolsRetrofit.School... schools);
+
     @Query("SELECT * FROM school")
-    List<SchoolsRetrofit.School> getAllSchools();
+    LiveData<List<SchoolsRetrofit.School>> getAllSchools();
 }

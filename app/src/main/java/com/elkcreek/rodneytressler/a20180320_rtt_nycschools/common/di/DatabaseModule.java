@@ -21,6 +21,7 @@ public class DatabaseModule {
     @Singleton
     SchoolsDatabase providesSchoolDatabase(Context context) {
         SchoolsDatabase db = Room.databaseBuilder(context, SchoolsDatabase.class, "schools-database")
+                .allowMainThreadQueries()
                 .build();
         return db;
     }

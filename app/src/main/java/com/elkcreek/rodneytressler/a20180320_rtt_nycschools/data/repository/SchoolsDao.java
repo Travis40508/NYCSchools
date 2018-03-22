@@ -29,4 +29,10 @@ public interface SchoolsDao {
 
     @Query("SELECT * FROM school")
     LiveData<List<SchoolsRetrofit.School>> getAllSchools();
+
+    @Insert(onConflict = REPLACE)
+    void insertSchoolDetails(SchoolsRetrofit.SchoolDetails schoolDetails);
+
+    @Query("SELECT * FROM schooldetails WHERE schoolDbn LIKE :dbn")
+    SchoolsRetrofit.SchoolDetails findSchoolByDbn(String dbn);
 }
